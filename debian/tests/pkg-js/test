@@ -1,0 +1,4 @@
+if test "$AUTOPKGTEST_TMP" != ""; then
+	rm -f test/iteration-unsupported.js
+fi
+tap -J test
