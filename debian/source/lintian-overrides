@@ -1,0 +1,9 @@
+# Matches minipass-*/*
+add-component-copyright minipass-collect *
+add-component-copyright minipass-flush *
+add-component-copyright minipass-pipeline *
+add-component-copyright minipass-sized *
+# Generic types-* path
+add-component-copyright types-*
+# Test data
+very-long-line-length-in-source-file *minizlib/test/fixtures*
