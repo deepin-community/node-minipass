@@ -10,7 +10,7 @@ const stringToArrayBuffer = s => {
   return ab
 }
 
-const MP = require('../')
+const { Minipass: MP } = require('../')
 
 const e = { encoding: 'utf8' }
 t.test('write array buffer', t => {
@@ -28,10 +28,8 @@ t.test('write uint8 typed array', t => {
   return mp.concat().then(s => t.equal(s, 'hello'))
 })
 
-const {
-  ArrayBuffer: VMArrayBuffer,
-  Uint8Array: VMUint8Array,
-} = require('vm').runInNewContext('({ArrayBuffer,Uint8Array})')
+const { ArrayBuffer: VMArrayBuffer, Uint8Array: VMUint8Array } =
+  require('vm').runInNewContext('({ArrayBuffer,Uint8Array})')
 
 const stringToVMArrayBuffer = s => {
   const buf = Buffer.from(s)

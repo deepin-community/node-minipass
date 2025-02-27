@@ -1,0 +1,32 @@
+From: =?utf-8?q?Bastien_Roucari=C3=A8s?= <rouca@debian.org>
+Date: Mon, 29 Jul 2024 18:36:01 +0000
+Subject: Expose pipes and buffer
+
+Needed for tap (temporary workarround)
+
+forwarded: not-needed
+---
+ index.js | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/index.js b/index.js
+index e65c4a6..adbd4f3 100644
+--- a/index.js
++++ b/index.js
+@@ -120,12 +120,12 @@ class Minipass extends Stream {
+     this.readable = true
+     this[BUFFERLENGTH] = 0
+     this[DESTROYED] = false
+-    if (options && options.debugExposeBuffer === true) {
++    //if (options && options.debugExposeBuffer === true) {
+       Object.defineProperty(this, 'buffer', { get: () => this[BUFFER] })
+-    }
+-    if (options && options.debugExposePipes === true) {
++    //}
++    //if (options && options.debugExposePipes === true) {
+       Object.defineProperty(this, 'pipes', { get: () => this[PIPES] })
+-    }
++    //}
+     this[SIGNAL] = options && options.signal
+     this[ABORTED] = false
+     if (this[SIGNAL]) {

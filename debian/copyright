@@ -12,7 +12,7 @@ Source: https://github.com/isaacs/minipass#readme
 Files-Excluded-minizlib: npm-*
 
 Files: *
-Copyright: npm, Inc. and Contributors
+Copyright: 2017-2023 npm, Inc, Isaac Z. Schlueter, and Contributors
 License: ISC
 
 Files: debian/*

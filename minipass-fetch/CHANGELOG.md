@@ -1,5 +1,34 @@
 # Changelog
 
+## [3.0.3](https://github.com/npm/minipass-fetch/compare/v3.0.2...v3.0.3) (2023-04-26)
+
+### Dependencies
+
+* [`7b5c016`](https://github.com/npm/minipass-fetch/commit/7b5c016c94a2ded9070f8a781895244fecb354c0) [#96](https://github.com/npm/minipass-fetch/pull/96) bump minipass from 4.2.7 to 5.0.0 (#96)
+
+## [3.0.2](https://github.com/npm/minipass-fetch/compare/v3.0.1...v3.0.2) (2023-04-13)
+
+### Bug Fixes
+
+* [`3c40fdc`](https://github.com/npm/minipass-fetch/commit/3c40fdc8f179182bf9142b96e072a07bc9df746a) handle invalid redirect header in a response (#100) (@wraithgar, Mohammad macbook)
+* [`cc962bc`](https://github.com/npm/minipass-fetch/commit/cc962bc03337d2f189a72e5a521b85289398f45d) Support longer timeouts - Inform http/tls timeout of chosen timeout (@josh-hemphill)
+
+## [3.0.1](https://github.com/npm/minipass-fetch/compare/v3.0.0...v3.0.1) (2022-12-07)
+
+### Dependencies
+
+* [`1bb15fc`](https://github.com/npm/minipass-fetch/commit/1bb15fc33e873a29adb02149ee017b2c25c8a831) [#87](https://github.com/npm/minipass-fetch/pull/87) bump minipass from 3.3.6 to 4.0.0
+
+## [3.0.0](https://github.com/npm/minipass-fetch/compare/v2.1.2...v3.0.0) (2022-10-10)
+
+### ⚠️ BREAKING CHANGES
+
+* `minipass-fetch` is now compatible with the following semver range for node: `^14.17.0 || ^16.13.0 || >=18.0.0`
+
+### Features
+
+* [`144dc38`](https://github.com/npm/minipass-fetch/commit/144dc38eb2e3be72ed916d426fc0063bd6cfacd4) [#74](https://github.com/npm/minipass-fetch/pull/74) postinstall for dependabot template-oss PR (@lukekarrys)
+
 ## [2.1.2](https://github.com/npm/minipass-fetch/compare/v2.1.1...v2.1.2) (2022-08-22)
 
 

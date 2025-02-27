@@ -1,0 +1,33 @@
+From: =?utf-8?q?Bastien_Roucari=C3=A8s?= <rouca@debian.org>
+Date: Sun, 28 Jul 2024 22:48:53 +0000
+Subject: Do not require default export
+
+Forwarded: not-needed
+---
+ minipass-collect/index.js     | 2 +-
+ minipass-collect/package.json | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/minipass-collect/index.js b/minipass-collect/index.js
+index 2fe68c0..3497f55 100644
+--- a/minipass-collect/index.js
++++ b/minipass-collect/index.js
+@@ -1,4 +1,4 @@
+-const Minipass = require('minipass')
++const { Minipass } = require('minipass')
+ const _data = Symbol('_data')
+ const _length = Symbol('_length')
+ class Collect extends Minipass {
+diff --git a/minipass-collect/package.json b/minipass-collect/package.json
+index 54d87ac..f323960 100644
+--- a/minipass-collect/package.json
++++ b/minipass-collect/package.json
+@@ -18,7 +18,7 @@
+     "tap": "^14.6.9"
+   },
+   "dependencies": {
+-    "minipass": "^3.0.0"
++    "minipass": "^5.0.0"
+   },
+   "files": [
+     "index.js"

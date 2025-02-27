@@ -1,0 +1,88 @@
+From: =?utf-8?q?Bastien_Roucari=C3=A8s?= <rouca@debian.org>
+Date: Mon, 29 Jul 2024 09:46:11 +0000
+Subject: Export default
+
+Avoid breaking unrelated packages
+
+Forwarded: not-needed
+---
+ index.d.ts                  |  2 ++
+ index.js                    |  3 ++-
+ scripts/transpile-to-esm.js |  3 ++-
+ test/compat.js              | 32 ++++++++++++++++++++++++++++++++
+ 4 files changed, 38 insertions(+), 2 deletions(-)
+ create mode 100644 test/compat.js
+
+diff --git a/index.d.ts b/index.d.ts
+index 86851f9..1cdf02c 100644
+--- a/index.d.ts
++++ b/index.d.ts
+@@ -150,3 +150,5 @@ export class Minipass<
+   [Symbol.iterator](): Generator<RType, void, void>
+   [Symbol.asyncIterator](): AsyncGenerator<RType, void, void>
+ }
++
++export default Minipass;
+diff --git a/index.js b/index.js
+index ed07c17..e65c4a6 100644
+--- a/index.js
++++ b/index.js
+@@ -699,4 +699,5 @@ class Minipass extends Stream {
+   }
+ }
+ 
+-exports.Minipass = Minipass
++module.exports = Minipass
++module.exports.Minipass = Minipass
+diff --git a/scripts/transpile-to-esm.js b/scripts/transpile-to-esm.js
+index 5a73597..90c01cb 100644
+--- a/scripts/transpile-to-esm.js
++++ b/scripts/transpile-to-esm.js
+@@ -4,7 +4,8 @@ const { readFileSync, writeFileSync } = require('fs')
+ const { resolve } = require('path')
+ const cjs = readFileSync(resolve(__dirname, '../index.js'), 'utf8')
+ const esm = cjs
+-  .replace(/exports\.Minipass\s*=[^\n]*/, '')
++  .replace(/module\.exports\.Minipass\s*=[^\n]*/, '')
++  .replace(/module\.exports\s*=[^\n]*/, 'export default Minipass')
+   .replace(/class Minipass /, 'export class Minipass ')
+   .replace(
+     /const ([a-zA-Z0-9]+)\s*=\s*require\('([^']+)'\)/g,
+diff --git a/test/compat.js b/test/compat.js
+new file mode 100644
+index 0000000..e1a9a2b
+--- /dev/null
++++ b/test/compat.js
+@@ -0,0 +1,32 @@
++const Minipass = require('../')
++const t = require('tap')
++
++t.test('some basic piping and writing', async t => {
++  let mp = new Minipass({ encoding: 'base64', debugExposeBuffer: true })
++  t.notOk(mp.flowing)
++  mp.flowing = true
++  t.notOk(mp.flowing)
++  t.equal(mp.encoding, 'base64')
++  mp.encoding = null
++  t.equal(mp.encoding, null)
++  t.equal(mp.readable, true)
++  t.equal(mp.writable, true)
++  t.equal(mp.write('hello'), false)
++  let dest = new Minipass({ debugExposeBuffer: true })
++  let sawDestData = false
++  dest.once('data', chunk => {
++    sawDestData = true
++    t.type(chunk, Buffer)
++  })
++  t.equal(mp.pipe(dest), dest, 'pipe returns dest')
++  t.ok(sawDestData, 'got data becasue pipe() flushes')
++  t.equal(mp.write('bye'), true, 'write() returns true when flowing')
++  dest.pause()
++  t.equal(mp.write('after pause'), false, 'false when dest is paused')
++  t.equal(mp.write('after false'), false, 'false when not flowing')
++  t.equal(dest.buffer.length, 1, '1 item is buffered in dest')
++  t.equal(mp.buffer.length, 1, '1 item buffered in src')
++  dest.resume()
++  t.equal(dest.buffer.length, 0, 'nothing is buffered in dest')
++  t.equal(mp.buffer.length, 0, 'nothing buffered in src')
++})

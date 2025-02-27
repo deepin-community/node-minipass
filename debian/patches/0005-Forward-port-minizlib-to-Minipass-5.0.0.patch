@@ -1,0 +1,36 @@
+From: =?utf-8?q?Bastien_Roucari=C3=A8s?= <rouca@debian.org>
+Date: Sun, 28 Jul 2024 23:08:55 +0000
+Subject: Forward port minizlib to Minipass 5.0.0
+
+Forwarded: not-needed
+---
+ minizlib/index.js     | 2 +-
+ minizlib/package.json | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/minizlib/index.js b/minizlib/index.js
+index fbaf69e..38f1cd9 100644
+--- a/minizlib/index.js
++++ b/minizlib/index.js
+@@ -5,7 +5,7 @@ const Buffer = require('buffer').Buffer
+ const realZlib = require('zlib')
+ 
+ const constants = exports.constants = require('./constants.js')
+-const Minipass = require('minipass')
++const { Minipass } = require('minipass')
+ 
+ const OriginalBufferConcat = Buffer.concat
+ 
+diff --git a/minizlib/package.json b/minizlib/package.json
+index 98825a5..dcb8af9 100644
+--- a/minizlib/package.json
++++ b/minizlib/package.json
+@@ -4,7 +4,7 @@
+   "description": "A small fast zlib stream built on [minipass](http://npm.im/minipass) and Node.js's zlib binding.",
+   "main": "index.js",
+   "dependencies": {
+-    "minipass": "^3.0.0",
++    "minipass": "^5.0.0",
+     "yallist": "^4.0.0"
+   },
+   "scripts": {

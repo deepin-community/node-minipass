@@ -1,0 +1,33 @@
+From: =?utf-8?q?Bastien_Roucari=C3=A8s?= <rouca@debian.org>
+Date: Sun, 28 Jul 2024 22:53:58 +0000
+Subject: Do not require default for minipass-sized
+
+Forwarded: not-needed
+---
+ minipass-sized/index.js     | 2 +-
+ minipass-sized/package.json | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/minipass-sized/index.js b/minipass-sized/index.js
+index a0c8acd..5f56a3d 100644
+--- a/minipass-sized/index.js
++++ b/minipass-sized/index.js
+@@ -1,4 +1,4 @@
+-const Minipass = require('minipass')
++const { Minipass } = require('minipass')
+ 
+ class SizeError extends Error {
+   constructor (found, expect) {
+diff --git a/minipass-sized/package.json b/minipass-sized/package.json
+index a3257fd..e1bfc06 100644
+--- a/minipass-sized/package.json
++++ b/minipass-sized/package.json
+@@ -18,7 +18,7 @@
+     "tap": "^14.6.4"
+   },
+   "dependencies": {
+-    "minipass": "^3.0.0"
++    "minipass": "^5.0.0"
+   },
+   "main": "index.js",
+   "keywords": [

@@ -1,0 +1,23 @@
+From: =?utf-8?q?Bastien_Roucari=C3=A8s?= <rouca@debian.org>
+Date: Sun, 28 Jul 2024 23:03:03 +0000
+Subject: Avoid a warning in minipass-sized test
+
+Forwarded: not-needed
+---
+ minipass-sized/test/basic.js | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/minipass-sized/test/basic.js b/minipass-sized/test/basic.js
+index bbdcada..aded83f 100644
+--- a/minipass-sized/test/basic.js
++++ b/minipass-sized/test/basic.js
+@@ -77,7 +77,7 @@ t.test('projectiles', t => {
+ })
+ 
+ t.test('exports SizeError class', t => {
+-  t.isa(MPS.SizeError, 'function')
+-  t.isa(MPS.SizeError.prototype, Error)
++  t.type(MPS.SizeError, 'function')
++  t.type(MPS.SizeError.prototype, Error)
+   t.end()
+ })

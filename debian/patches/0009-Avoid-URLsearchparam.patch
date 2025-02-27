@@ -1,0 +1,67 @@
+From: =?utf-8?q?Bastien_Roucari=C3=A8s?= <rouca@debian.org>
+Date: Mon, 29 Jul 2024 07:55:56 +0000
+Subject: Avoid URLsearchparam
+
+Forwarded: not-needed
+---
+ minipass-fetch/test/body.js | 15 +++++++++------
+ 1 file changed, 9 insertions(+), 6 deletions(-)
+
+diff --git a/minipass-fetch/test/body.js b/minipass-fetch/test/body.js
+index 6db33de..cd2f2c3 100644
+--- a/minipass-fetch/test/body.js
++++ b/minipass-fetch/test/body.js
+@@ -3,7 +3,7 @@ const t = require('tap')
+ const Body = require('../lib/body.js')
+ const { URLSearchParams } = require('url')
+ //const stringToArrayBuffer = require('string-to-arraybuffer')
+-const URLSearchParamsPolyfill = require('@ungap/url-search-params')
++//const URLSearchParamsPolyfill = require('@ungap/url-search-params')
+ const Blob = require('../lib/blob')
+ const FormData = require('form-data')
+ const { Minipass } = require('minipass')
+@@ -18,28 +18,31 @@ t.test('null body', async t => {
+   t.equal(Body.getTotalBytes(b), 0)
+   t.match(await b.buffer(), Buffer.alloc(0))
+ })
+-
++/*
+ t.test('url search params', async t => {
+   const b = new Body(new URLSearchParams('a=1'))
+   t.equal(b.body.toString(), 'a=1')
+   t.equal(Body.extractContentType(b.body), null)
+   t.equal(Body.getTotalBytes(b), 3)
+ })
+-
++*/
++/*
+ t.test('url search params polyfill', async t => {
+   const b = new Body(new URLSearchParamsPolyfill('a=1'))
+   t.equal(b.body.toString(), 'a=1')
+   t.equal(Body.extractContentType(b.body), null)
+   t.equal(Body.getTotalBytes(b), 3)
+ })
+-
++*/
++/*
+ t.test('url search params by another name', async t => {
+   const b = new Body(new (class Florb extends URLSearchParams {})('a=1'))
+   t.equal(b.body.toString(), 'a=1')
+   t.equal(Body.extractContentType(b.body), null)
+   t.equal(Body.getTotalBytes(b), 3)
+ })
+-
++*/
++/*
+ t.test('url search params by an even differenter name', async t => {
+   const b = new Body(new (class Florb extends URLSearchParams {
+     get [Symbol.toStringTag] () {
+@@ -50,7 +53,7 @@ t.test('url search params by an even differenter name', async t => {
+   t.equal(Body.extractContentType(b.body), null)
+   t.equal(Body.getTotalBytes(b), 3)
+ })
+-
++*/
+ t.test('form-data', async t => {
+   const f = new FormData()
+   f.append('a', '1')

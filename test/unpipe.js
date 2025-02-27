@@ -1,7 +1,7 @@
 const t = require('tap')
-const Minipass = require('../')
+const { Minipass } = require('../')
 
-const src = new Minipass({ encoding: 'utf8' })
+const src = new Minipass({ encoding: 'utf8', debugExposePipes: true })
 const dest = new Minipass({ encoding: 'utf8' })
 const dest2 = new Minipass({ encoding: 'utf8' })
 const destOut = []
@@ -20,22 +20,14 @@ t.strictSame(destOut, ['hello'])
 t.strictSame(dest2Out, ['hello'])
 t.strictSame(srcOut, ['hello'])
 
-t.match(src.pipes, [
-  { dest },
-  { dest: dest2 },
-])
+t.match(src.pipes, [{ dest }, { dest: dest2 }])
 
 src.unpipe(dest)
 
-t.match(src.pipes, [
-  { dest: dest2 },
-])
+t.match(src.pipes, [{ dest: dest2 }])
 
 src.unpipe(dest) // no-op
-t.match(src.pipes, [
-  { dest: dest2 },
-])
-
+t.match(src.pipes, [{ dest: dest2 }])
 
 src.write('world')
 t.strictSame(destOut, ['hello'])

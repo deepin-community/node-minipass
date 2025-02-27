@@ -1,0 +1,3 @@
+index.mjs
+minipass-fetch/test/fixtures/tls/localhost.*
+minipass-fetch/test/fixtures/tls/minipass-CA.srl

@@ -1,1 +1,16 @@
-skip-test-that-require-tap-14.patch
+0001-Do-not-require-default-export.patch
+0002-Do-not-require-default-export-for-minipass-flush.patch
+0003-Do-not-require-default-for-minipass-sized.patch
+0004-Avoid-a-warning-in-minipass-sized-test.patch
+0005-Forward-port-minizlib-to-Minipass-5.0.0.patch
+0006-Avoid-string-to-array-buffer.patch
+0007-Avoid-abort-controller.patch
+0008-Avoid-parted.patch
+0009-Avoid-URLsearchparam.patch
+0010-Disable-a-test-that-fail.patch
+0011-port-minipass-json-stream-to-newer-minipass.patch
+0012-Fix-test-that-fail.patch
+0013-Port-minipass-pipeline-to-newer-minipass.patch
+0014-Port-test-of-minipass-pipeline-to-newer-tap.patch
+0015-Export-default.patch
+0016-Expose-pipes-and-buffer.patch
