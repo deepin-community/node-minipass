@@ -1,0 +1,1 @@
+node scripts/transpile-to-esm.js

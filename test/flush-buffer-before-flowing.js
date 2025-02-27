@@ -6,7 +6,7 @@
 // the Pipeline's buffer is holding a chunk, but the Pipeline itself is in
 // flowing mode.  The solution is to always drain the buffer before emitting
 // 'data', if there is other data waiting to be emitted.
-const Minipass = require('../')
+const { Minipass } = require('../')
 const t = require('tap')
 
 const src = new Minipass({ encoding: 'utf8' })
@@ -24,17 +24,16 @@ src.write('a')
 src.write('b')
 
 const pipeline = new (class Pipeline extends Minipass {
-  constructor (opt) {
+  constructor(opt) {
     super(opt)
     dest.on('data', c => super.write(c))
     dest.on('end', () => super.end())
   }
-  emit (ev, ...args) {
-    if (ev === 'resume')
-      dest.resume()
+  emit(ev, ...args) {
+    if (ev === 'resume') dest.resume()
     return super.emit(ev, ...args)
   }
-})({ encoding: 'utf8'})
+})({ encoding: 'utf8' })
 
 mid.pipe(dest)
 src.pipe(mid)

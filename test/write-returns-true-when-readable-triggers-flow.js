@@ -2,7 +2,7 @@
 // true, because even though s is not flowing at the START of the write(),
 // it IS flowing by the END of the write call.
 
-const Minipass = require('../')
+const { Minipass } = require('../')
 const t = require('tap')
 
 t.test('empty write', async t => {
@@ -14,10 +14,8 @@ t.test('empty write', async t => {
   // since readable emits immediately, the NEXT one needs to trigger
   let firstReadable = false
   s.on('readable', () => {
-    if (!firstReadable)
-      firstReadable = true
-    else
-      s.pipe(dest)
+    if (!firstReadable) firstReadable = true
+    else s.pipe(dest)
   })
   t.equal(s.flowing, false, 'src is not flowing yet')
   t.equal(s.write(''), true, 'return true, now flowing')
@@ -34,10 +32,8 @@ t.test('non-empty write', async t => {
   // since readable emits immediately, the NEXT one needs to trigger
   let firstReadable = false
   s.on('readable', () => {
-    if (!firstReadable)
-      firstReadable = true
-    else
-      s.pipe(dest)
+    if (!firstReadable) firstReadable = true
+    else s.pipe(dest)
   })
   t.equal(s.flowing, false, 'src is not flowing yet')
   t.equal(s.write('b'), true, 'return true, now flowing')

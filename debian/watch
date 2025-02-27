@@ -2,49 +2,59 @@ version=4
 opts=\
 dversionmangle=auto,\
 repacksuffix=+ds,\
-filenamemangle=s/.*?(\d[\d\.-]*@ARCHIVE_EXT@)/node-minipass-$1/ \
- https://github.com/isaacs/minipass/tags .*/archive.*/v?([\d\.]+).tar.gz group
-
-# It is not recommended use npmregistry. Please investigate more.
-# Take a look at https://wiki.debian.org/debian/watch/
-opts="searchmode=plain,component=minipass-collect,ctype=nodejs,pgpmode=none" \
- https://registry.npmjs.org/minipass-collect https://registry.npmjs.org/minipass-collect/-/minipass-collect-([\d\.]+)@ARCHIVE_EXT@ checksum
+filenamemangle=s%.*/@ANY_VERSION@%@PACKAGE@-$1.tar.gz%,\
+searchmode=plain \
+ https://api.github.com/repos/isaacs/minipass/tags?per_page=100 \
+ https://api.github.com/repos/isaacs/minipass/tarball/refs/tags/v?(5.0.0) group
 
 opts=\
+searchmode=plain,\
+component=minipass-collect,\
+filenamemangle=s%.*/@ANY_VERSION@%@PACKAGE@-collect-$1.tar.gz% \
+ https://api.github.com/repos/isaacs/minipass-collect/tags?per_page=100 \
+ https://api.github.com/repos/isaacs/minipass-collect/tarball/refs/tags/v?(1.0.2) checksum
+
+opts=\
+searchmode=plain,\
 component=minipass-fetch,\
-ctype=nodejs,\
-dversionmangle=auto,\
-filenamemangle=s/.*?(\d[\d\.-]*@ARCHIVE_EXT@)/node-minipass-fetch-$1/ \
- https://github.com/npm/minipass-fetch/tags .*/archive.*/v?([\d\.]+).tar.gz checksum
+filenamemangle=s%.*/@ANY_VERSION@%@PACKAGE@-fetch-$1.tar.gz% \
+ https://api.github.com/repos/npm/minipass-fetch/tags?per_page=100 \
+ https://api.github.com/repos/npm/minipass-fetch/tarball/refs/tags/v?(3.0.3) checksum
 
 opts=\
+searchmode=plain,\
 component=minipass-flush,\
-ctype=nodejs,\
-dversionmangle=auto,\
-filenamemangle=s/.*?(\d[\d\.-]*@ARCHIVE_EXT@)/node-minipass-flush-$1/ \
- https://github.com/isaacs/minipass-flush/tags .*/archive.*/v?([\d\.]+).tar.gz checksum
-
-# It is not recommended use npmregistry. Please investigate more.
-# Take a look at https://wiki.debian.org/debian/watch/
-opts="searchmode=plain,component=minipass-json-stream,ctype=nodejs,pgpmode=none" \
- https://registry.npmjs.org/minipass-json-stream https://registry.npmjs.org/minipass-json-stream/-/minipass-json-stream-([\d\.]+)@ARCHIVE_EXT@ checksum
-
-# It is not recommended use npmregistry. Please investigate more.
-# Take a look at https://wiki.debian.org/debian/watch/
-opts="searchmode=plain,component=minipass-pipeline,ctype=nodejs,pgpmode=none" \
- https://registry.npmjs.org/minipass-pipeline https://registry.npmjs.org/minipass-pipeline/-/minipass-pipeline-([\d\.]+)@ARCHIVE_EXT@ checksum
+filenamemangle=s%.*/@ANY_VERSION@%@PACKAGE@-flush-$1.tar.gz% \
+ https://api.github.com/repos/isaacs/minipass-flush/tags?per_page=100 \
+ https://api.github.com/repos/isaacs/minipass-flush/tarball/refs/tags/@ANY_VERSION@ checksum
 
 opts=\
+searchmode=plain,\
+component=minipass-json-stream,\
+filenamemangle=s%.*/@ANY_VERSION@%@PACKAGE@-json-stream-$1.tar.gz% \
+ https://api.github.com/repos/isaacs/minipass-json-stream/tags?per_page=100 \
+ https://api.github.com/repos/isaacs/minipass-json-stream/tarball/refs/tags/@ANY_VERSION@ checksum
+
+
+opts=\
+searchmode=plain,\
+component=minipass-pipeline,\
+filenamemangle=s%.*/@ANY_VERSION@%@PACKAGE@-pipeline-$1.tar.gz% \
+ https://api.github.com/repos/isaacs/minipass-pipeline/tags?per_page=100 \
+ https://api.github.com/repos/isaacs/minipass-pipeline/tarball/refs/tags/@ANY_VERSION@ checksum
+
+opts=\
+searchmode=plain,\
 component=minipass-sized,\
-ctype=nodejs,\
-dversionmangle=auto,\
-filenamemangle=s/.*?(\d[\d\.-]*@ARCHIVE_EXT@)/node-minipass-sized-$1/ \
- https://github.com/isaacs/minipass-sized/tags .*/archive.*/v?([\d\.]+).tar.gz checksum
+filenamemangle=s%.*/@ANY_VERSION@%@PACKAGE@-sized-$1.tar.gz% \
+ https://api.github.com/repos/isaacs/minipass-sized/tags?per_page=100 \
+ https://api.github.com/repos/isaacs/minipass-sized/tarball/refs/tags/@ANY_VERSION@ checksum
 
 opts=\
+searchmode=plain,\
 component=minizlib,\
-ctype=nodejs,\
-dversionmangle=auto,\
-filenamemangle=s/.*?(\d[\d\.-]*@ARCHIVE_EXT@)/node-minizlib-$1/ \
- https://github.com/isaacs/minizlib/tags .*/archive.*/v?([\d\.]+).tar.gz checksum
+filenamemangle=s%.*/@ANY_VERSION@%node-minizlib-$1.tar.gz% \
+ https://api.github.com/repos/isaacs/minizlib/tags?per_page=100 \
+ https://api.github.com/repos/isaacs/minizlib/tarball/refs/tags/v?(2.1.2) checksum
+
 

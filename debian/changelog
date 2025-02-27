@@ -1,3 +1,31 @@
+node-minipass (5.0.0+~cs10.3.21-2) unstable; urgency=medium
+
+  * Team upload
+  * Fix breaks to node-tar
+
+ -- Bastien Roucariès <rouca@debian.org>  Tue, 13 Aug 2024 10:02:53 +0000
+
+node-minipass (5.0.0+~cs10.3.21-1) unstable; urgency=medium
+
+  * Team upload
+  * New upstream version
+
+ -- Bastien Roucariès <rouca@debian.org>  Sun, 11 Aug 2024 23:20:42 +0000
+
+node-minipass (3.3.6+~cs9.4.19-3) unstable; urgency=medium
+
+  * Team upload
+  * Ease transition to 5.0.0 by exporting ts outside default
+
+ -- Bastien Roucariès <rouca@debian.org>  Wed, 31 Jul 2024 21:45:42 +0000
+
+node-minipass (3.3.6+~cs9.4.19-2) unstable; urgency=medium
+
+  * Team upload
+  * Ease transition to 5.0.0 by exporting outside default
+
+ -- Bastien Roucariès <rouca@debian.org>  Wed, 31 Jul 2024 21:11:45 +0000
+
 node-minipass (3.3.6+~cs9.4.19-1) unstable; urgency=medium
 
   * Team upload

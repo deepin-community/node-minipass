@@ -1,1 +1,2 @@
-tap -J test
+#tap -Rtest -J test
+for I in test/*.js; do node $I; done

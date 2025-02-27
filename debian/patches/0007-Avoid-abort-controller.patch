@@ -1,0 +1,107 @@
+From: =?utf-8?q?Bastien_Roucari=C3=A8s?= <rouca@debian.org>
+Date: Sun, 28 Jul 2024 23:28:50 +0000
+Subject: Avoid abort-controller
+
+---
+ minipass-fetch/package.json    |  2 --
+ minipass-fetch/test/request.js | 19 +++++++++++--------
+ 2 files changed, 11 insertions(+), 10 deletions(-)
+
+diff --git a/minipass-fetch/package.json b/minipass-fetch/package.json
+index 54fa75e..2d4602c 100644
+--- a/minipass-fetch/package.json
++++ b/minipass-fetch/package.json
+@@ -26,8 +26,6 @@
+     "@npmcli/eslint-config": "^4.0.0",
+     "@npmcli/template-oss": "4.14.1",
+     "@ungap/url-search-params": "^0.2.2",
+-    "abort-controller": "^3.0.0",
+-    "abortcontroller-polyfill": "~1.7.3",
+     "encoding": "^0.1.13",
+     "form-data": "^4.0.0",
+     "nock": "^13.2.4",
+diff --git a/minipass-fetch/test/request.js b/minipass-fetch/test/request.js
+index f02658c..03d2782 100644
+--- a/minipass-fetch/test/request.js
++++ b/minipass-fetch/test/request.js
+@@ -5,7 +5,7 @@ const Request = require('../lib/request.js')
+ const { Minipass } = require('minipass')
+ const base = 'http://localhost:12345/'
+ const FormData = require('form-data')
+-const { AbortController } = require('abortcontroller-polyfill/dist/abortcontroller')
++//const { AbortController } = require('abortcontroller-polyfill/dist/abortcontroller')
+ const Blob = require('../lib/blob.js')
+ const http = require('http')
+ const { URL } = require('url')
+@@ -49,7 +49,7 @@ t.test('signal must be a signal', t => {
+   t.throws(() => new Request('http://foo.com', { signal: {} }), TypeError)
+   t.end()
+ })
+-
++/*
+ t.test('should support wrapping Request instance', t => {
+   const url = `${base}hello`
+ 
+@@ -80,7 +80,8 @@ t.test('should support wrapping Request instance', t => {
+   t.same(Request.getNodeRequestOptions(r1), Request.getNodeRequestOptions(r2))
+   t.end()
+ })
+-
++*/
++/*
+ t.test('should override signal on derived Request instances', t => {
+   const parentAbortController = new AbortController()
+   const derivedAbortController = new AbortController()
+@@ -94,7 +95,8 @@ t.test('should override signal on derived Request instances', t => {
+   t.equal(derivedRequest.signal, derivedAbortController.signal)
+   t.end()
+ })
+-
++*/
++/*
+ t.test('should allow removing signal on derived Request instances', t => {
+   const parentAbortController = new AbortController()
+   const parentRequest = new Request('http://localhost/test', {
+@@ -107,7 +109,7 @@ t.test('should allow removing signal on derived Request instances', t => {
+   t.equal(derivedRequest.signal, null)
+   t.end()
+ })
+-
++*/
+ t.test('should throw error with GET/HEAD requests with body', t => {
+   t.throws(() => new Request('http://localhost', { body: '' }), TypeError)
+   t.throws(() => new Request('http://localhost', { body: 'a' }), TypeError)
+@@ -191,7 +193,7 @@ t.test('should support blob() method', async t => {
+   t.equal(result.size, 3)
+   t.equal(result.type, '')
+ })
+-
++/*
+ t.test('should support clone() method', async t => {
+   const url = base
+   const r = new Minipass().end('a=1')
+@@ -229,6 +231,7 @@ t.test('should support clone() method', async t => {
+   t.equal(results[0], 'a=1')
+   t.equal(results[1], 'a=1')
+ })
++*/
+ /*
+ t.test('should support ArrayBuffer as body', t => {
+   const req = new Request('http://localhost', {
+@@ -432,7 +435,7 @@ t.test('get node request options', t => {
+   t.throws(() => Request.getNodeRequestOptions(new Request('xyz://ok.html')), {
+     message: 'Only HTTP(S) protocols are supported',
+   })
+-
++/*
+   t.throws(() => Request.getNodeRequestOptions(new Request('http://a.b', {
+     method: 'POST',
+     body: new (class extends Minipass {
+@@ -444,6 +447,6 @@ t.test('get node request options', t => {
+   })), {
+     message: 'Cancellation of streamed requests with AbortSignal is not supported',
+   })
+-
++*/
+   t.end()
+ })

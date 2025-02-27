@@ -1,0 +1,20 @@
+From: =?utf-8?q?Bastien_Roucari=C3=A8s?= <rouca@debian.org>
+Date: Mon, 29 Jul 2024 08:14:05 +0000
+Subject: Fix test that fail
+
+link snapshot for newer tap
+
+forwared: not-needed
+---
+ minipass-json-stream/tap-snapshots/test/basic.js.test.cjs | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 120000 minipass-json-stream/tap-snapshots/test/basic.js.test.cjs
+
+diff --git a/minipass-json-stream/tap-snapshots/test/basic.js.test.cjs b/minipass-json-stream/tap-snapshots/test/basic.js.test.cjs
+new file mode 120000
+index 0000000..6c15162
+--- /dev/null
++++ b/minipass-json-stream/tap-snapshots/test/basic.js.test.cjs
+@@ -0,0 +1 @@
++../test-basic.js-TAP.test.js
+\ No newline at end of file

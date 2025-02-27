@@ -1,5 +1,5 @@
 const t = require('tap')
-const MP = require('../')
+const { Minipass: MP } = require('../')
 t.test('do not auto-end empty stream if explicitly paused', t => {
   const mp = new MP()
   let waitedForEnd = false
@@ -8,5 +8,8 @@ t.test('do not auto-end empty stream if explicitly paused', t => {
     waitedForEnd = true
     mp.resume()
   })
-  return mp.end().promise().then(() => t.ok(waitedForEnd, 'waited for end'))
+  return mp
+    .end()
+    .promise()
+    .then(() => t.ok(waitedForEnd, 'waited for end'))
 })

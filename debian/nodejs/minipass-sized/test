@@ -1,1 +1,1 @@
-tap -J test
+node test/*.js

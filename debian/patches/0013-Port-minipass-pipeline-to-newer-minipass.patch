@@ -1,0 +1,81 @@
+From: =?utf-8?q?Bastien_Roucari=C3=A8s?= <rouca@debian.org>
+Date: Mon, 29 Jul 2024 08:17:20 +0000
+Subject: Port minipass-pipeline to newer minipass
+
+* do not use default import
+* this.buffer.length is now this.bufferLength
+
+forwarded: not-needed
+---
+ minipass-pipeline/index.js                         | 4 ++--
+ minipass-pipeline/package.json                     | 2 +-
+ minipass-pipeline/test/backpressure.js             | 2 +-
+ minipass-pipeline/test/basic.js                    | 2 +-
+ minipass-pipeline/test/blocked-resumed-pipeline.js | 2 +-
+ 5 files changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/minipass-pipeline/index.js b/minipass-pipeline/index.js
+index b94ea14..9197dbe 100644
+--- a/minipass-pipeline/index.js
++++ b/minipass-pipeline/index.js
+@@ -1,4 +1,4 @@
+-const Minipass = require('minipass')
++const { Minipass } = require('minipass')
+ const EE = require('events')
+ const isStream = s => s && s instanceof EE && (
+   typeof s.pipe === 'function' || // readable
+@@ -117,7 +117,7 @@ class Pipeline extends Minipass {
+   }
+   write (chunk, enc, cb) {
+     return this[_head].write(chunk, enc, cb) &&
+-      (this.flowing || this.buffer.length === 0)
++      (this.flowing || this.bufferLength === 0)
+   }
+   end (chunk, enc, cb) {
+     this[_head].end(chunk, enc, cb)
+diff --git a/minipass-pipeline/package.json b/minipass-pipeline/package.json
+index d608dc6..84f54b3 100644
+--- a/minipass-pipeline/package.json
++++ b/minipass-pipeline/package.json
+@@ -18,7 +18,7 @@
+     "tap": "^14.6.9"
+   },
+   "dependencies": {
+-    "minipass": "^3.0.0"
++    "minipass": "^5.0.0"
+   },
+   "files": [
+     "index.js"
+diff --git a/minipass-pipeline/test/backpressure.js b/minipass-pipeline/test/backpressure.js
+index ef5946f..ef60be9 100644
+--- a/minipass-pipeline/test/backpressure.js
++++ b/minipass-pipeline/test/backpressure.js
+@@ -1,5 +1,5 @@
+ const Pipeline = require('../')
+-const Minipass = require('minipass')
++const { Minipass } = require('minipass')
+ const t = require('tap')
+ 
+ t.test('verify that pipelines exert backpressure properly', t => {
+diff --git a/minipass-pipeline/test/basic.js b/minipass-pipeline/test/basic.js
+index 2b77917..7a65028 100644
+--- a/minipass-pipeline/test/basic.js
++++ b/minipass-pipeline/test/basic.js
+@@ -1,5 +1,5 @@
+ const Pipeline = require('../')
+-const Minipass = require('minipass')
++const { Minipass } = require('minipass')
+ const t = require('tap')
+ 
+ t.test('wrap some streams', t => {
+diff --git a/minipass-pipeline/test/blocked-resumed-pipeline.js b/minipass-pipeline/test/blocked-resumed-pipeline.js
+index b43fa92..0616dd3 100644
+--- a/minipass-pipeline/test/blocked-resumed-pipeline.js
++++ b/minipass-pipeline/test/blocked-resumed-pipeline.js
+@@ -1,5 +1,5 @@
+ const Pipeline = require('../')
+-const Minipass = require('minipass')
++const { Minipass } = require('minipass')
+ 
+ const t = require('tap')
+ 

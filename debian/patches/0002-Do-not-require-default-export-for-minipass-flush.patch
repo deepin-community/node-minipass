@@ -1,0 +1,33 @@
+From: =?utf-8?q?Bastien_Roucari=C3=A8s?= <rouca@debian.org>
+Date: Sun, 28 Jul 2024 22:51:29 +0000
+Subject: Do not require default export for minipass-flush
+
+Forwarded: not-needed
+---
+ minipass-flush/index.js     | 2 +-
+ minipass-flush/package.json | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/minipass-flush/index.js b/minipass-flush/index.js
+index cb2537f..2067769 100644
+--- a/minipass-flush/index.js
++++ b/minipass-flush/index.js
+@@ -1,4 +1,4 @@
+-const Minipass = require('minipass')
++const { Minipass } = require('minipass')
+ const _flush = Symbol('_flush')
+ const _flushed = Symbol('_flushed')
+ const _flushing = Symbol('_flushing')
+diff --git a/minipass-flush/package.json b/minipass-flush/package.json
+index 09127d0..24eb0d4 100644
+--- a/minipass-flush/package.json
++++ b/minipass-flush/package.json
+@@ -18,7 +18,7 @@
+     "tap": "^14.6.9"
+   },
+   "dependencies": {
+-    "minipass": "^3.0.0"
++    "minipass": "^5.0.0"
+   },
+   "files": [
+     "index.js"
